@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.sbc.digital.transactions
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, graalvm, gradle, hamcrest, http-client, java, java-application, junit, logback, lombok, micronaut-build, mockito, mongo-reactive, netty-server, readme, shade, testcontainers, yaml]
