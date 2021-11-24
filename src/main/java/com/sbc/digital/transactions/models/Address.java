@@ -1,5 +1,8 @@
 package com.sbc.digital.transactions.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
@@ -10,22 +13,26 @@ import java.time.LocalDate;
 @Builder
 public class Address {
 
-    @NonNull
-    String addressLine1;
+    private String shortFormatted;
 
-    @NonNull
-    String addressLine2;
+    private String formatted;
 
-    String addressLine3;
+    private String addressLine1;
 
-    String addressLine4;
+    private String addressLine2;
 
-    String postCode;
+    @JsonProperty("region")
+    private String addressLine3;
 
-    @NonNull
-    Country country;
+    private String townOrCity;
 
-    @NonNull
-    LocalDate atAddressSince;
+    private String country;
+
+    private String postcode;
+
+    //TODO: Change this to geojson
+    private Double latitude;
+
+    private Double longitude;
 
 }

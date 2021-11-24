@@ -28,9 +28,15 @@ public class Transaction {
 
     NotionalAmount localAmount;
 
+    LocalDateTime settled;
+
+    LocalDateTime updated;
+
     Map<String, String> metadata;
 
     List<String> labels;
+
+    Merchant merchant;
 
     //List<Fee> fees;
 
@@ -39,10 +45,6 @@ public class Transaction {
     URI image;
 
     List<URI> attachments;
-
-    LocalDateTime settled;
-
-    LocalDateTime updated;
 
     String dedupeId;
 

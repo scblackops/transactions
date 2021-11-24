@@ -1,10 +1,16 @@
 package com.sbc.digital.transactions.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+import java.util.Currency;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,7 +23,8 @@ class TransactionTest_Overseas {
         mapper = new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                .configure(SerializationFeature.INDENT_OUTPUT, true);
+                .configure(SerializationFeature.INDENT_OUTPUT, true)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
 
@@ -27,9 +34,11 @@ class TransactionTest_Overseas {
                   "id": "tx_0000ACmFdpJlCnnTBzjjIf",
                   "created": "2021-10-27T03:29:24.229Z",
                   "description": "HOTEL INDIGO PHUKET PA PHUKET        THA",
-                  "amount": -8438,
+                  "amount": {
+                    "value": -8438,
+                    "currency": "THB"
+                    }, 
                   "fees": {},
-                  "currency": "GBP",
                   "merchant": {
                     "id": "merch_00009q5Iwtc6NuP1XdwRxB",
                     "group_id": "grp_00009eJlXz1eBiei5w5Azx",
@@ -43,10 +52,10 @@ class TransactionTest_Overseas {
                     "address": {
                       "short_formatted": "124 Rat U Thit 200 Pee Rd., Tambon Patong, Chang Wat Phuket, 83150, Thailand",
                       "formatted": "124 Rat U Thit 200 Pee Rd., Tambon Patong, Chang Wat Phuket, 83150, Thailand",
-                      "address": "124 RAT U THIT 200 PEE RD.",
-                      "city": "Tambon Patong",
+                      "addressLine1": "124 RAT U THIT 200 PEE RD.",
+                      "townOrCity": "Tambon Patong",
                       "region": "Chang Wat Phuket",
-                      "country": "THA",
+                      "country": "TH",
                       "postcode": "83150",
                       "latitude": 7.899286999999998,
                       "longitude": 98.299809,
@@ -127,15 +136,22 @@ class TransactionTest_Overseas {
 
         //Arrange
 
-
         //Act
-        //mapper.readValue(OVERSEAS_PAYMENT_FIXTURE, Transaction.class);
+        var result = mapper.readValue(OVERSEAS_PAYMENT_FIXTURE, Transaction.class);
 
         //Assert
-        assertEquals("","");
-        assertEquals("","");
-        assertEquals("","");
-        assertEquals("","");
+        assertEquals("2021-10-27T03:29:24.229", result.getCreated().toString());
+        assertEquals(new BigDecimal("-8438"),result.getAmount().getValue());
+        assertEquals("THB",result.getAmount().getCurrency().toString());
+        assertEquals("tx_0000ACmFdpJlCnnTBzjjIf",result.getId());
+        assertEquals("merch_00009q5Iwtc6NuP1XdwRxB",result.getMerchant().getId());
+        assertEquals(false,result.getMerchant().getAtm());
+        assertEquals("holidays",result.getMerchant().getCategory());
+        assertEquals("124 RAT U THIT 200 PEE RD.",result.getMerchant().getAddress().getAddressLine1());
+        assertEquals("Tambon Patong",result.getMerchant().getAddress().getTownOrCity());
+        assertEquals("83150",result.getMerchant().getAddress().getPostcode());
+        assertEquals("Chang Wat Phuket",result.getMerchant().getAddress().getAddressLine3());
+
     }
 
 }
