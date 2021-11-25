@@ -3,6 +3,7 @@ package com.sbc.digital.transactions.service;
 import com.sbc.digital.transactions.models.Transaction;
 import io.micronaut.context.annotation.Bean;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,23 +11,27 @@ import java.util.List;
 @Bean
 public final class TransactionServiceImpl implements TransactionService{
 
+
+
     @Override
-    public void addTransaction(Transaction transaction) {
+    public Mono<Void> addTransaction(Transaction transaction) {
+        return Mono.just(null);
+    }
+
+    @Override
+    public Mono<Void> addTransactions(List<Transaction> transactionList) {
+        return Mono.just(null);
+    }
+
+    @Override
+    public Mono<Void> updateTransaction(Transaction transaction) {
+        return Mono.just(null);
 
     }
 
     @Override
-    public void addTransactions(List<Transaction> transactionList) {
-
-    }
-
-    @Override
-    public void updateTransaction(Transaction transaction) {
-
-    }
-
-    @Override
-    public void updateTransactions(List<Transaction> transaction) {
+    public Mono<Void> updateTransactions(List<Transaction> transaction) {
+        return Mono.just(null);
 
     }
 

@@ -2,19 +2,20 @@ package com.sbc.digital.transactions.service;
 
 import com.sbc.digital.transactions.models.Transaction;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public sealed interface TransactionService permits TransactionServiceImpl{
 
-    void addTransaction(Transaction transaction);
+    Mono<Void> addTransaction(Transaction transaction);
 
-    void addTransactions(List<Transaction> transactionList);
+    Mono<Void> addTransactions(List<Transaction> transactionList);
 
-    void updateTransaction(Transaction transaction);
+    Mono<Void> updateTransaction(Transaction transaction);
 
-    void updateTransactions(List<Transaction> transaction);
+    Mono<Void> updateTransactions(List<Transaction> transaction);
 
     Flux<Transaction> getTransaction(String transactionId);
 
