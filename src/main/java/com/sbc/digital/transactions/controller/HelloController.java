@@ -1,6 +1,6 @@
 package com.sbc.digital.transactions.controller;
 
-import com.sbc.digital.transactions.service.TransactionService;
+import com.sbc.digital.transactions.service.TransactionServiceImpl;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -13,12 +13,12 @@ import reactor.core.publisher.Mono;
 public class HelloController {
 
     @Inject
-    TransactionService transactionService;
+    TransactionServiceImpl transactionServiceImpl;
 
     @Get("/plain")
     @Produces(MediaType.TEXT_PLAIN) 
     public String index() {
-        return transactionService.beep();
+        return "";
     }
 
 
