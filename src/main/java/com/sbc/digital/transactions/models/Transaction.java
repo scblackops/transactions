@@ -1,6 +1,7 @@
 package com.sbc.digital.transactions.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
 
@@ -11,6 +12,7 @@ import java.util.Map;
 
 @Value
 @JsonIgnoreProperties(ignoreUnknown =true)
+@Builder
 public class Transaction {
 
     @NonNull

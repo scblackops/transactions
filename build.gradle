@@ -22,7 +22,9 @@ micronaut {
 dependencies {
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.micronaut:micronaut-http-validation")
-    implementation("io.micronaut:micronaut-http-client")
+    implementation 'io.micronaut.reactor:micronaut-reactor:2.1.1'
+    implementation 'io.micronaut.reactor:micronaut-reactor-http-client:2.1.1'
+    //implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.mongodb:micronaut-mongo-reactive")
     implementation("javax.annotation:javax.annotation-api")
@@ -32,7 +34,6 @@ dependencies {
     testImplementation("org.testcontainers:mongodb")
     testImplementation("org.testcontainers:testcontainers")
     compileOnly("org.graalvm.nativeimage:svm")
-
     implementation("io.micronaut:micronaut-validation")
 
     testImplementation("org.hamcrest:hamcrest")

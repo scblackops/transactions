@@ -17,6 +17,7 @@ public class Address {
 
     private String formatted;
 
+    @NonNull
     private String addressLine1;
 
     private String addressLine2;
@@ -24,6 +25,7 @@ public class Address {
     @JsonProperty("region")
     private String addressLine3;
 
+    @NonNull
     private String townOrCity;
 
     private String country;
